@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { Search, ShoppingCart } from "lucide-react";
+
     export default function Header() {
         return (
 
@@ -19,22 +21,27 @@ import Image from 'next/image';
             <Link href="/" className="text-gray-700 dark:text-gray-200 hover:text-yellow-500">
               Home
             </Link>
-            <Link href="/About-Us" className="text-gray-700 dark:text-gray-200 hover:text-yellow-500">
+            <Link href="/about-us" className="text-gray-700 dark:text-gray-200 hover:text-yellow-500">
               About-Us
             </Link>
-            <Link href="/Bundles" className="text-gray-700 dark:text-gray-200 hover:text-yellow-500">
+            <Link href="/bundles" className="text-gray-700 dark:text-gray-200 hover:text-yellow-500">
               Bundles
             </Link>
-            <Link href="/Human-Hairs" className="text-gray-700 dark:text-gray-200 hover:text-yellow-500">
+            <Link href="/human-hairs" className="text-gray-700 dark:text-gray-200 hover:text-yellow-500">
               Human-Hairs
             </Link>
-            <Link href="/Hair-Products" className="text-gray-700 dark:text-gray-200 hover:text-yellow-500">
+            <Link href="/hair-products" className="text-gray-700 dark:text-gray-200 hover:text-yellow-500">
               Hair-Products
             </Link>
-            <Link href="/Hair-Accessories" className="text-gray-700 dark:text-gray-200 hover:text-yellow-500">
+            <Link href="/hair-accessories" className="text-gray-700 dark:text-gray-200 hover:text-yellow-500">
               Hair-Accessories
             </Link>
           </nav>
+          <div className="flex items-center gap-4">
+          <Search className="w-5 h-5 text-black hover:text-yellow-500 cursor-pointer" />
+          <ShoppingCart className="w-5 h-5 text-black hover:text-yellow-500 cursor-pointer" />
+          </div>
+
           </header>
     );
     }

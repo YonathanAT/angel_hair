@@ -1,5 +1,4 @@
 import Link from "next/link";
-
 export default function Home() {
   return (
     <main className="p-8 space-y-24">
@@ -8,7 +7,7 @@ export default function Home() {
        {/* LEFT */}
        <div className="text-left">
         <Link
-          href="/About-Us"
+          href="/about-us"
           className="block text-[80px] font-bold text-yellow-400 hover:text-yellow-300 transition underline"
         >
           About-Us
@@ -22,11 +21,7 @@ export default function Home() {
           Whether you are looking for a sleek and elegant look or a more
           voluminous style, we have the perfect products for you.
         </p>
-      </div>
-
-     
-
-        
+      </div> 
       </div>
 
       {/* RIGHT */}
