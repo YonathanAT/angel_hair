@@ -2,6 +2,11 @@ import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 import Image from 'next/image'; // Import the Image component from Next.js
 
 export default function Footer() {
+  const payments = [
+    '/assets/mastercard.png',
+    '/assets/paypal.png',
+    '/assets/applepay.png',
+  ];
   return (
     <footer className="bg-gray-800 text-white py-6 mt-12">
       <div className="flex justify-between items-center px-12">
@@ -49,7 +54,21 @@ export default function Footer() {
         </span>
         </a>
         </div>
-        <p className="text-sm text-gray-400">&copy; 2026 Angel's Hair. All rights reserved.</p>
+        <p className="text-sm text-gray-400 mb-6 ">&copy; 2026 Angel's Hair. All rights reserved.</p>
+      </div>
+
+      <div className="max-w-6xl mx-auto px-6 text-center">
+        
+        {/* Payment icons */}
+        <div className="flex justify-center items-center px-12">
+          {payments.map((img, i) => (
+            <div key={i} className="bg-white rounded-md p-1">
+              <Image src={img} alt="payment" width={40} height={10} />
+            </div>
+          ))}
+        </div>
+
+        
       </div>
     </footer>
   );
