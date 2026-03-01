@@ -4,10 +4,24 @@ import { useState } from 'react';
 
 export default function BundlesPage() {
     const [shoppingCart, setShoppingCart] = useState<any[]>([]); /*creates empty basket that holds anything*/
-    const addCart = (item: any) => {
-        setShoppingCart([...shoppingCart, item]);
-        console.log("cart:", [...shoppingCart,item]);
+    
+    // adding the items to the cart
+    const addCart = (item: { id: number; name: string; price: number }, quantity: number) => {
+      // check if the item is already in cart
+       
+        const existingShopCart = shoppingCart.find(cartItem => cartItem.id === item.id);
+        if (existingShopCart){
+          setShoppingCart(shoppingCart.map(cartItem =>
+            cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity + quantity} : item  
+          ));
+        } else {
+          setShoppingCart([...shoppingCart, { ...item, quantity }]);
+          
+      }
     };
+
+
+
     // array of bundles 
     const bundles = [
        { id: 1, name: "Body-Wave", price: 299, image: "/assets/bundle2.jpg" },
@@ -48,10 +62,13 @@ export default function BundlesPage() {
                      Add to cart
                    </button>
                    </div>
+        
                   </div>
+                  
                 </div>
+                
                 ))}
           </div>
        </main>
     );
-}
+  }
