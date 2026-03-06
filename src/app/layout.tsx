@@ -3,7 +3,7 @@
 import "./globals.css";
 import Header from "../components/header";
 import Footer from "../components/footer";
-import { CartProvider } from "../context/shopcarcontext";
+import { CartProvider } from "@/context/shopcarcontext";
 
 export default function RootLayout({children, }: { children: React.ReactNode;}) {
   return (

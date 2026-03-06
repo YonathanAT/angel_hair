@@ -1,29 +1,43 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import React, { createContext, ReactNode, useContext, useState } from "react";
 
 type CartItem = {
+  id: number;
   name: string;
   price: number;
   quantity: number;
 };
 
 type CartContextType = {
-  cart: CartItem[];
-  addToCart: (item: CartItem) => void;
+  shoppingCart: CartItem[];
+  addCart: (item: CartItem, quantity: number) => void;
+  clearCart: () => void;
 };
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
-export function CartProvider({ children }: { children: React.ReactNode }) {
-  const [cart, setCart] = useState<CartItem[]>([]);
+export const CartProvider = ({ children }: { children: ReactNode }) => {
+  const [shoppingCart, setCart] = useState<CartItem[]>([]);
 
-  const addToCart = (item: CartItem) => {
-    setCart((prev) => [...prev, item]);
+  const addCart = (item: CartItem, quantity: number) => {
+    const existingItem = shoppingCart.find((currentItem) => currentItem.id === item.id);
+    if (existingItem) {
+      setCart(
+        shoppingCart.map((currentItem) =>
+          currentItem.id === item.id
+            ? { ...currentItem, quantity: currentItem.quantity + quantity }
+            : currentItem
+        )
+      );
+    } else {
+      setCart([...shoppingCart, { ...item, quantity }]);
+    }
   };
+    const clearCart = () => setCart([]);
 
   return (
-    <CartContext.Provider value={{ cart, addToCart }}>
+    <CartContext.Provider value={{ shoppingCart, addCart, clearCart }}>
       {children}
     </CartContext.Provider>
   );

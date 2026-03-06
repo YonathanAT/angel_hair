@@ -1,25 +1,45 @@
 "use client";
-import { useState } from 'react';
+import { useCart } from "@/context/shopcarcontext";
 
+export type CartItem =  {
+  id: number;
+  name: string;
+  price: number;
+  quantity: number;
+}
 
-// checkout function that sends the cart items to the backend API for processing the payment with Stripe
 export default function CheckoutPage() {
-    
-    const  checkout = async () => {
-        const response = await fetch('/api/checkout/stripe', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ items: shoppingCart }),
-        });
-        const data = await response.json();
-        console.log("checkout session:", data);
-      };
-   return(
-     <button
-       onClick={checkout}
-       className="bg-black text-white px-4 py-2 rounded"
->
-       Pay Now
-     </button>
-   );
+  const { shoppingCart, clearCart } = useCart();
+
+  const total = shoppingCart.reduce((sum: number, item: CartItem) => sum + item.price * item.quantity, 0);
+
+  return (
+    <main className="p-6">
+      <h1 className="text-2xl font-bold mb-4">Checkout</h1>
+
+      {shoppingCart.length === 0 ? (
+        <p>Your cart is empty.</p>
+      ) : (
+        <>
+          <ul className="mb-4">
+            {shoppingCart.map(item => (
+              <li key={item.id} className="flex justify-between mb-2">
+                <span>{item.name} x {item.quantity}</span>
+                <span>£{item.price * item.quantity}</span>
+              </li>
+            ))}
+          </ul>
+
+          <p className="text-lg font-bold mb-4">Total: £{total}</p>
+
+          <button
+            onClick={clearCart}
+            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
+          >
+            Clear Cart
+          </button>
+        </>
+      )}
+    </main>
+  );
 }
